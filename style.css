@@ -131,3 +131,18 @@ body {
     text-wrap: balance;
   }
 
+  .four-col-dl {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Four equal columns */
+    grid-auto-rows: auto;
+    gap: 1em;
+  }
+  
+  .four-col-dl dt {
+    grid-row: 1; /* All <dt> on row 1 */
+  }
+  
+  .four-col-dl dd {
+    grid-row: 2; /* All <dd> on row 2 */
+    margin: 0;   /* Optional: remove default dd indentation */
+  }

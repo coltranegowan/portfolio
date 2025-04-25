@@ -1,31 +1,37 @@
 [
     {
-        "title": "Lorem ipsum dolor sit.",
+        "title": "DSC 106 Project 2",
+        "year": "2025",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint ad, sequi laborum consequuntur harum nostrum est vel. Aut, perspiciatis quis quos dolorem dignissimos aliquam veniam hic voluptates incidunt accusantium officiis."
+        "description": "Created two visualizations on the same data, one pushing the viewer towards one point of view, and one pointing the opposite direction using both earnest and deceptive techniques."
     },
     {
-        "title": "Delectus, velit. Quas, quod.",
+        "title": "DSC 106 Project 1",
+        "year": "2025",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Esse nulla quos expedita tempora porro, similique nesciunt, dolor, doloribus ipsum sit obcaecati labore ut! Tempora recusandae neque commodi ipsum? Repellat, quam tempore! Nesciunt eligendi accusamus rerum odio beatae velit."
+        "description": "Designed an expository visualization on Target and Walmart's prices per calorie and food processing score."
     },
     {
-        "title": "Aliquid consectetur voluptate repellendus!",
+        "title": "DSC 80 Final Project",
+        "year": "2025",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Velit quos aut soluta possimus atque, voluptatum cum laudantium aperiam modi doloremque ducimus unde ratione laborum amet, necessitatibus tempora neque nostrum, fugiat at nulla assumenda accusamus dolor. Saepe, non dicta."
+        "description": "Explored the characteristics of major power outages over time and created a predictive model using these characteristics to predict the cause of a major power outage given these characteristics."
     },
     {
-        "title": "Recusandae aliquam veritatis officia.",
+        "title": "DSC 20 Project 2",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Eius molestias illum placeat nemo minima consectetur odio? Hic, atque. Odit illo optio vel quaerat alias necessitatibus et maxime iusto nesciunt consequuntur accusamus quas, reiciendis sequi dolore dicta perspiciatis harum!"
     },
     {
-        "title": "At voluptates eligendi error!",
+        "title": "DSC 20 Project 1",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Neque, blanditiis aspernatur inventore excepturi, ipsum tenetur velit eveniet minima nulla animi beatae quae ex distinctio culpa commodi dignissimos ullam laudantium, repellendus eum. Fugiat ducimus enim aperiam ab, illum recusandae."
     },
     {
-        "title": "Accusamus error atque velit!",
+        "title": "DSC 10 Final Project",
+        "year": "2023",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Ullam eum tempore, reprehenderit neque modi reiciendis quis accusantium animi doloremque accusamus, labore magni maxime harum impedit, aut ab eius repudiandae sint tempora. Sequi exercitationem, sed voluptas voluptatem enim vitae?"
     },

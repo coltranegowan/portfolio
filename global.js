@@ -92,3 +92,41 @@ document.body.insertAdjacentHTML(
       console.error('Error fetching or parsing JSON data:', error);
     }
   }
+
+  export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+    if (!(containerElement instanceof HTMLElement)) {
+      console.error('Invalid containerElement provided to renderProjects');
+      return;
+    }
+      const validHeadingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+    if (!validHeadingTags.includes(headingLevel)) {
+      console.warn(`Invalid heading level "${headingLevel}" passed. Falling back to "h2".`);
+      headingLevel = 'h2';
+    }
+      containerElement.innerHTML = '';
+  
+    if (!Array.isArray(projects)) {
+      console.error('Projects must be an array');
+      return;
+    }
+  
+    for (let project of projects) {
+      const article = document.createElement('article');
+  
+      const title = project?.title ?? 'Untitled Project';
+      const image = project?.image ?? '';
+      const description = project?.description ?? 'No description available.';
+  
+      article.innerHTML = `
+        <${headingLevel}>${title}</${headingLevel}>
+        ${image ? `<img src="${image}" alt="${title}">` : ''}
+        <p>${description}</p>
+      `;
+  
+      containerElement.appendChild(article);
+    }
+  }
+
+  export async function fetchGitHubData(username) {
+    return fetchJSON(`https://api.github.com/users/${username}`);
+  }

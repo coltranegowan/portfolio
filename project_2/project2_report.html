@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Project 2 Report</title>
+    <style>
+      :root {
+        --color-neutral-95: hsl(220 10% 95%);
+        --color-neutral-90: hsl(220 10% 90%);
+        --color-neutral-80: hsl(220 10% 80%);
+        --color-neutral-70: hsl(220 10% 70%);
+        --color-neutral-60: hsl(220 10% 60%);
+        --color-neutral-50: hsl(220 10% 50%);
+        --color-neutral-40: hsl(220 10% 40%);
+        --color-neutral-30: hsl(220 10% 30%);
+        --color-neutral-20: hsl(220 10% 20%);
+        --color-neutral-10: hsl(220 10% 10%);
+      }
+
+      html {
+        font: 100%/1.5 system-ui;
+        counter-reset: figure;
+        background: var(--color-neutral-95);
+        max-width: min(75vw, 80em);
+        margin: 0 auto;
+      }
+
+      /* Headings */
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        line-height: 1.1;
+        font-weight: 600;
+        text-wrap: balance;
+      }
+
+      h1,
+      h2 {
+        border-bottom: 1px solid var(--color-neutral-80);
+        padding-bottom: 0.2em;
+      }
+
+      h1 {
+        margin-block: 1em 0.5rem;
+        font-size: clamp(2.5em, 150% + 2vh + 2vw, 10vmin);
+        font-weight: 800;
+
+        small {
+          display: block;
+          width: fit-content;
+          padding: 0.2em 0.5em;
+          margin-inline: auto;
+          color: white;
+          background: var(--color-neutral-40);
+          font-size: 40%;
+          text-transform: uppercase;
+          white-space: nowrap;
+        }
+      }
+
+      h2 {
+        font-size: 180%;
+        color: var(--color-neutral-30);
+      }
+
+      h3 {
+        font-size: 130%;
+      }
+
+      /* Lists */
+
+      ul,
+      ol {
+        padding-inline-start: 2em;
+      }
+
+      li {
+        &::marker {
+          color: var(--color-neutral-40);
+        }
+
+        + li {
+          margin-top: 0.2em;
+        }
+      }
+
+      /* Sectioning elements */
+
+      header {
+        padding-block: 1em;
+        text-align: center;
+      }
+
+      main {
+        background: white;
+        color: var(--color-neutral-20);
+        border-radius: 1rem;
+        padding: 0.1rem 2rem;
+      }
+
+      /* Figures */
+
+      figure {
+        margin: 1em 0;
+        padding: 0.5rem;
+        margin-inline: -0.5em;
+        border: 1px solid var(--color-neutral-80);
+        box-shadow: 0 0.1em 0.2em var(--color-neutral-95);
+        text-align: center;
+        background: white;
+
+        > figcaption {
+          font: 500 75% var(--font-sans);
+          background: var(--color-neutral-95);
+          padding: 0.5rem;
+          margin: -0.5rem;
+          margin-top: 0.5rem;
+          counter-increment: figure;
+          text-align: left;
+
+          &::before {
+            content: 'Figure ' counter(figure) ': ';
+            font-weight: bold;
+            color: var(--color-neutral-40);
+          }
+
+          a:not(:hover, :focus, :active) {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-color: color-mix(
+              in lab,
+              currentColor,
+              transparent 70%
+            );
+          }
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>
+        <small>Assignment 4</small>
+        Persuasive or Deceptive Visualization?
+      </h1>
+
+      <p><strong>Coltrane Gowan</strong> — <em>cgowan@ucsd.edu</em></p>
+    </header>
+
+    <main>
+      <h2>Proposition: Use-of-force complaints have disproportionately targeted younger individuals.</h2>
+
+      <section>
+        <h3>FOR the Proposition</h3>
+
+        <figure>
+          <img src="pro_vis.png" alt="Younger New Yorkers Suffer More Excessive Force Violations", width="1000px" />
+          <figcaption>The distribution of excessive force complaints in New York City is skewed towards younger citizens, 
+            especially towards those in the 18-24 age range.
+          </figcaption>
+        </figure>
+
+        <p>Design Decisions and Rationale:</p>
+
+        <ul>
+          <li><h4>Bin Sizes: -1.5</h4>
+            <p>My choice to make the bins different sizes was made to exaggerate the already present trend of excessive force 
+            complaints being higher for complainants under 30. Originally I had uniform bin sizes which did show this trend to
+            an extent, but I decided that making the bins for older ages shorter would make it seem like age was even more of a
+            factor in this data. I think the very obvious negative correlation after the 18-24 bin makes it veyr obvious to the reader
+            of this trend, leaving less room for doubt on smaller details such as the sixe of the bins, since the width of the bars 
+            are all the same.</p>
+          </li>
+          <li><h4>Color Choices: -1</h4>
+            <p>I used 'px.colors.sequential.Reds[::-1]' to create an effect in this graph where the bars got less red as the ages got larger, 
+            which was another way to coaxe the reader into the outcome that I wanted them to get from this visualization. The darker red on the left 
+            corresponding to younger ages denotes a feeling of more dense, more important data and draws eyes to itself. When a reader's eyes are 
+            drawn here, the color plus the height of the bar will make it very easy to draw the conclusion that younger people are more effected 
+            by these complaints. The red also draws parallels to blood and violence, which can bring in an empathetic element when talking about 
+            violent complaints.</p>
+          </li><h4>Title: -1.5</h4>
+          <p>One of the main parts of a visualization is the title, and this one invokes even more emotions in the reader. Word choices like 
+          'suffer' helps summon more negative emotions before one even looks at the graph, and a good title can have someone making up their 
+          mind before even processing the visualization. My word choice of 'Violations' instead of 'Complaints' also helps this data seem more 
+          like actual wrongdoing that occured instead of just a complaint by a citizen.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>AGAINST the Proposition</h3>
+
+        <figure>
+          <img src="against_vis.png" alt="The Kids That Cried Wolf: Younger People in New York File More Police Complaints", width="1100px"/>
+          <figcaption>This visualization shows clearly how younger people, especially those 18-24, in New York City file many more complaints than any other age 
+            group.
+          </figcaption>
+        </figure>
+
+        <p>Design Decisions and Rationale:</p>
+
+        <ul>
+          <li>
+            <h4>Color Choice: -1</h4>
+            <p>The color palette used here again leverages a reversed red scale (px.colors.sequential.Reds[::-1]), where younger age groups 
+              are assigned darker reds, and older ones get lighter shades. While this isn’t inherently misleading, it visually links youth with 
+              urgency and intensity. In the context of police complaints, red evokes notions of danger or wrongdoing, subtly guiding viewers to 
+              focus on the youth. I considered using a neutral or diverging palette (e.g., blues or grays), but the red scale makes the disparity 
+              between groups feel more alarming, even when the counts may not be extremely far apart. This subtly pushes a more emotionally charged 
+              narrative.
+            </p>
+          </li>
+          <li><h4>Title: -1.5</h4>
+            <p>The title “The Kids That Cried Wolf: Younger People in New York File More Police Complaints” heavily frames the data with a 
+              critical lens. It evokes a well-known moral fable associated with dishonesty and overreaction, implying that these complaints may 
+              lack validity. While the data does show more complaints by younger people, the framing undermines their legitimacy and credibility. 
+              I chose this phrasing to intentionally provoke skepticism in the reader. A more neutral alternative could have been “Police 
+              Complaint Volume by Age Group,” but I opted for this in order to suggest over-reporting in youth, setting up bias before data is 
+              even read. I also used misleading bin titles but labeling the first bin 18-24, when that bin includes all ages 0-24. By doing this, 
+              I made that bin seem even smaller and more important.
+            </p>
+          </li>
+          <li><h4>Scaling Values (Exaggeration): -2</h4>
+            <p>The most overtly deceptive choice was applying a power transform (scaled_count = complaint_count ** 1.5) to the y-values. 
+              This decision artificially inflates the height differences between age groups, making it seem as if the 18–24 group files 
+              exponentially more complaints than others. I chose this to visually overemphasize a real trend—yes, younger groups file more 
+              complaints, but this transform makes it look extreme. Linear scaling showed less dramatic differences. While it persuades more 
+              effectively, it crosses the line into misleading territory since no axis annotation hints at non-linearity.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Final Reflection</h2>
+
+        <p>Creating both visualizations challenged me to think deeper about how data design influences perception. For the persuasive side, 
+          it was relatively straightforward to guide interpretation by making earnest design choices, like emphasizing trends through clear binning 
+          or using emotionally charged color schemes and titles. These choices leaned into the data’s natural story while still maintaining its 
+          integrity. On the other hand, designing the deceptive visualization required more intentional manipulation. I had to consciously push 
+          boundaries by exaggerating scaling, skewing color emphasis, and crafting a provocative title that cast doubt on the validity of the 
+          complaints.
+          <br>
+          <br>
+          This project reshaped my understanding of what ethical data visualization entails. Ethical analysis is not just about showing the 
+          “truth” but doing so in a way that avoids distorting the viewer’s interpretation through visual tricks. It means preserving proportional 
+          relationships, labeling clearly, and resisting the urge to editorialize with misleading framing or exaggerated encodings. While 
+          persuasion can be acceptable—especially in advocacy or storytelling—there is a line where it turns into manipulation. That line is 
+          crossed when design choices intentionally obscure the data’s real structure, provoke unearned emotional reactions, or imply conclusions 
+          that the data does not support. From this experience, I see how ethical visualization is a balancing act between narrative clarity and 
+          visual honesty.</p>
+      </section>
+    </main>
+  </body>
+</html>

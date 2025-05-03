@@ -116,11 +116,14 @@ document.body.insertAdjacentHTML(
       const title = project?.title ?? 'Untitled Project';
       const image = project?.image ?? '';
       const description = project?.description ?? 'No description available.';
+      const year = project?.year ?? '';
   
       article.innerHTML = `
         <${headingLevel}>${title}</${headingLevel}>
         ${image ? `<img src="${image}" alt="${title}">` : ''}
-        <p>${description}</p>
+        <p>${description}
+        <br>
+        <small><em>${year}</em></small></p>
       `;
   
       containerElement.appendChild(article);

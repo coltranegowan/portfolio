@@ -1,5 +1,11 @@
 [
     {
+        "title": "DSC 106 Bikewatching Project",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Created an interactive map visualization of bike traffic in the Boston area during different times of the day using D3."
+    },
+    {
         "title": "DSC 106 Project 2",
         "year": "2025",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
@@ -59,11 +65,6 @@
         "title": "Quibusdam asperiores natus repellendus?",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Voluptates neque inventore ratione fugit eos reiciendis totam ipsa ullam cum temporibus culpa quasi vero, exercitationem dolorem minus molestias illum praesentium harum? Ex, eveniet perferendis blanditiis aliquid cupiditate eius cumque."
-    },
-    {
-        "title": "Quibusdam fuga deserunt mollitia?",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Iste alias, natus ducimus aut aliquid nisi et modi nesciunt saepe voluptas illum reiciendis animi, repudiandae adipisci possimus quos eligendi quisquam! Quae atque est ipsum debitis architecto magni deleniti sequi."
     }
 ]
 

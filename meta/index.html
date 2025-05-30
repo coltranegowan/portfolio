@@ -8,9 +8,24 @@
         <div id="stats"></div>
         <p id="selection-count">No commits selected</p>
         <dl id="language-breakdown" class="stats"></dl>
-
+        
+        <div class="slider-wrap" style="display: flex; align-items: baseline;">
+                    <label for="commit-progress" class="filter-label" style="flex: 1;">
+                        Show commits until:
+                        <input
+                        id="commit-progress"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="100"
+                        >
+                    </label>
+                    <time id="commit-time-slider" style="margin-left: auto;"></time>
+            </div>
         <h2>Commits by time of day</h2>
         <div id="chart"></div>
+
+        
 
         <dl id="commit-tooltip" class="info tooltip" hidden>
             <dt>Commit</dt>

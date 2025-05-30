@@ -3,6 +3,7 @@ import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 let xScale;
 let yScale;
 let commits;
+let filteredCommits = [];
 
 
 async function loadData() {
@@ -166,13 +167,17 @@ function renderCommitInfo(data, commits) {
       .call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
   
     // Axes
-    svg.append('g')
-      .attr('transform', `translate(0, ${usableArea.bottom})`)
-      .call(d3.axisBottom(xScale));
-  
-    svg.append('g')
-      .attr('transform', `translate(${usableArea.left}, 0)`)
-      .call(d3.axisLeft(yScale).tickFormat(d => String(d % 24).padStart(2, '0') + ':00'));
+    svg
+  .append('g')
+  .attr('transform', `translate(0, ${usableArea.bottom})`)
+  .attr('class', 'x-axis') // ✅ add this
+  .call(d3.axisBottom(xScale));
+
+  svg
+    .append('g')
+    .attr('transform', `translate(${usableArea.left}, 0)`)
+    .attr('class', 'y-axis') // ✅ optional, good for future updates
+    .call(d3.axisLeft(yScale).tickFormat(d => String(d).padStart(2, '0') + ':00'));
   
     // Dots
     const dots = svg.append('g').attr('class', 'dots');
@@ -209,7 +214,46 @@ svg.selectAll('.dots, .overlay ~ *').raise();
 
   }
   
-   
+   function updateScatterPlot(commits) {
+  const svg = d3.select('#chart').select('svg');
+
+  // Update X scale + axis
+  xScale.domain(d3.extent(commits, d => d.datetime));
+  const xAxisGroup = svg.select('g.x-axis');
+  xAxisGroup.selectAll('*').remove();
+  xAxisGroup.call(d3.axisBottom(xScale));
+
+  // Recalculate radius scale (optional)
+  const [minLines, maxLines] = d3.extent(commits, d => d.totalLines);
+  const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([2, 30]);
+
+  // Update dots
+  const dots = svg.select('g.dots');
+  const sorted = d3.sort(commits, d => -d.totalLines);
+
+  dots
+    .selectAll('circle')
+    .data(sorted)
+    .join('circle')
+    .attr('cx', d => xScale(d.datetime))
+    .attr('cy', d => yScale(d.hourFrac))
+    .attr('r', d => rScale(d.totalLines))
+    .attr('fill', d => d3.scaleLinear()
+    .domain([0, 6, 12, 18, 24])
+    .range(['#1e3a8a', '#60a5fa', '#facc15', '#2b5e92', '#1e3a8a'])(d.hourFrac))
+    .style('fill-opacity', 0.7)
+    .on('mouseenter', (event, commit) => {
+      d3.select(event.currentTarget).style('fill-opacity', 1);
+      renderTooltipContent(commit);
+      updateTooltipVisibility(true);
+      updateTooltipPosition(event);
+    })
+    .on('mouseleave', (event) => {
+      d3.select(event.currentTarget).style('fill-opacity', 0.7);
+      updateTooltipVisibility(false);
+    });
+}
+
    
 
    function updateTooltipVisibility(isVisible) {
@@ -224,11 +268,40 @@ svg.selectAll('.dots, .overlay ~ *').raise();
   }
   
   document.addEventListener('DOMContentLoaded', async () => {
-    const data = await loadData();
-    commits = processCommits(data);  // ← assign to global variable
+  const data = await loadData();
+  commits = processCommits(data);  // ← assign to global variable
+  renderScatterPlot(data, commits);
+
   
-    renderScatterPlot(data, commits);
+
+  // Create timeScale once commits are loaded
+  let timeScale = d3
+    .scaleTime()
+    .domain(d3.extent(commits, d => d.datetime))
+    .range([0, 100]);
+  
+    let commitProgress = 100;
+  let commitMaxTime = timeScale.invert(commitProgress);
+  // Update global max time
+  function onTimeSliderChange() {
+  const slider = document.getElementById('commit-progress');
+  commitProgress = +slider.value;
+  commitMaxTime = timeScale.invert(commitProgress);
+  document.getElementById('commit-time-slider').textContent = commitMaxTime.toLocaleString('en', {
+    dateStyle: 'long',
+    timeStyle: 'short',
   });
+
+  filteredCommits = commits.filter(d => d.datetime <= commitMaxTime);
+  updateScatterPlot(filteredCommits);
+}
+
+
+  // Initialize and hook up slider
+  onTimeSliderChange();
+  document.getElementById('commit-progress').addEventListener('input', onTimeSliderChange);
+});
+
 
   function isCommitSelected(selection, commit) {
     if (!selection) return false;
@@ -292,4 +365,7 @@ svg.selectAll('.dots, .overlay ~ *').raise();
     renderSelectionCount(selection);
     renderLanguageBreakdown(selection);
   }
+  
+  
+
   

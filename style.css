@@ -1,344 +1,525 @@
+/* Color Property */
 :root {
-  --color-accent: #5f8f7c;
-  color-scheme: light dark
+  --color-accent: oklch(0.27 0.0802 251.65);
+  --link-color-light: blue;
+  --link-hover-color-light: orange;
+  --link-color-dark: lightskyblue;
+  --link-hover-color-dark: lightcoral;
 }
- 
+
+/* Stabilize nav bar */
 html {
-  accent-color: var(--color-accent);
+  scrollbar-gutter: stable;
+  color-scheme: light dark; /* for dark light mode things */
 }
 
-.color-scheme {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 80%;
-  font-family: inherit;
+/* Centers the Content, Helps with Zoom/Resizing */
+body {
+  /* Set line height to 1.5 times the font size
+         and use the OS’s UI font as the website font
+       */
+  font: 100%/1.5 system-ui;
+  max-width: 100ch; /*helps with content width*/
+  margin-inline: max(1em, (100% - 100ch) / 2); /* helps with L&R margin */
+  accent-color: var(--color-accent); /* Added for Step 2.4 */
+}
 
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em; 
+/* Navigation Menu */
+nav {
+  --border-color: oklch(50% 10% 200 / 40%); /* Defined border color variable */
+  display: flex;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: var(
+    --border-color
+  ); /* new color for nav bar that adapts better for light dark modes */
+  margin-bottom: 1em;
+}
+
+nav a {
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  padding: 0.4em;
+  margin-bottom: 1px;
+}
+
+nav a:hover {
+  border-bottom: 0.4em;
+  border-bottom-color: var(--color-accent);
+  border-bottom-style: solid;
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+  padding-bottom: 0;
+}
+
+nav a.current {
+  border-bottom: 0.4em solid oklch(80% 3% 200);
+  padding-bottom: 0.4em;
+}
+
+/* Light Dark Switch */
+.color-scheme {
+  position: absolute; /* Take it out of normal flow */
+  top: 1rem; /* Adjust vertical position as needed */
+  right: 1rem; /* Adjust horizontal position as needed */
+  font-size: 80%; /* Optional: Adjust font size */
+  display: flex; /* To align label and select horizontally */
+  align-items: center; /* Vertically center the label and select */
+  gap: 0.5em; /* Optional: Space between label and select */
+}
+
+.color-scheme select {
+  /* Optional: Style the select dropdown if needed */
+  font: inherit; /* Inherit font styles from the body */
+}
+
+@media (max-width: 1350px) {
+  .color-scheme {
+    top: 4.5rem;
+  }
+}
+
+/* Formatting the Contacts Page */
+form {
+  display: grid; /* grid container */
+  grid-template-columns: auto 1fr; /* defines columns */
+  gap: 1em; /* create space between columns and stuff */
+}
+
+label,
+button {
+  grid-column: 1 / -1;
+}
+
+label {
+  display: contents;
 }
 
 input,
 textarea,
-button,
-select {
+button {
   font: inherit;
   width: 100%;
   box-sizing: border-box;
-  margin: 0;
 }
 
-
-body {
-    /* Set line height to 1.5 times the font size
-         and use the OS’s UI font as the website font
-       */
-    font: 100%/1.5 system-ui;
-    max-width: 80ch;
-    margin: auto;
-    padding: 1em;
-  }
-
-  
-
-  nav {
-    display: flex;
-    margin-bottom: 1em;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: oklch(80% 3% 200);
-    
-    ul {
-      display: contents;
-      li{
-        display: contents;
-      }
-    }
-    
-    a {
-    flex: 1;
-    text-decoration: none;
-    color: inherit;
-    text-align: center;
-    padding: 0.5em;
-    }
-    
-    a.current {
-      border-bottom-width: 0.4em;
-      border-bottom-style: solid;
-      border-bottom-color: #44876e;
-      padding-bottom: 0.3em
-      }
-
-    :hover {
-      border-bottom-width: 0.4em;
-      border-bottom-style: solid;
-      border-bottom-color: var(--color-accent);
-      padding-bottom: 0.3em;
-    }
-  }
-
-  form {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1em;
-  }
-  
-  form label {
-    display: grid;
-    grid-template-columns: subgrid;
-    grid-column: 1 / -1;
-    margin: 0.5em 0;
-  }
-  
-  input,
-  textarea,
-  button {
-    font: inherit;
-    width: 100%;
-    box-sizing: border-box;
-    margin: 0;
-  }
-  
-  button {
-    grid-column: 1 / -1;
-    padding: 0.5em 1em;
-  }
-
-  .projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
-    gap: 1em;
-  
-    article {
-      display: grid;
-      grid-template-rows: subgrid;
-      grid-row: span 3;
-    }
-  
-    h2 {
-      margin: 0;
-    }
-  }
-
-  h1 {
-    font-size: 300%;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    line-height: 1.1;
-    text-wrap: balance;
-  }
-
-  .four-col-dl {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Four equal columns */
-    grid-auto-rows: auto;
-    gap: 1em;
-  }
-  
-  .four-col-dl dt {
-    grid-row: 1; /* All <dt> on row 1 */
-  }
-  
-  .four-col-dl dd {
-    grid-row: 2; /* All <dd> on row 2 */
-    margin: 0;   /* Optional: remove default dd indentation */
-  }
-
-  #projects-plot {
-    max-width: 20em;
-    margin-block: 2em;
-  
-    overflow: visible;
-  }
-
-  .legend {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
-    gap: 1em;
-    padding: 1em;
-    margin-top: 2em;
-    border: 1px solid #ccc;
-    border-radius: 0.5em;
-    background-color: #f9f9f9;
-    list-style: none;
-  }
-  
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-  }
-  
-  .legend-item .swatch {
-    width: 1em;
-    height: 1em;
-    aspect-ratio: 1 / 1;
-    background-color: var(--color);
-    border-radius: 0.25em;
-    display: inline-block;
-  }
-
-  .container {
-    display: flex;
-    align-items: center; 
-    gap: 2em;
-    flex-wrap: wrap;
-    margin-block: 2em;
-  }
-  
-  #projects-plot {
-    max-width: 20em;
-    flex-shrink: 0; 
-  }
-  
-  .legend {
-    flex: 1; 
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
-    gap: 1em;
-    padding: 1em;
-    margin: 0;
-    border: 1px solid #ccc;
-    border-radius: 0.5em;
-    background-color: #f9f9f9;
-    list-style: none;
-  }
-  
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-  }
-  
-  .legend-item .swatch {
-    width: 1em;
-    height: 1em;
-    aspect-ratio: 1 / 1;
-    background-color: var(--color);
-    border-radius: 0.25em;
-    display: inline-block;
-  }
-
-  svg:has(path:hover) path:not(:hover) {
-    opacity: 0.5;
-  }
-  
-  svg path {
-    transition: opacity 300ms;
-    cursor: pointer; /* helpful for Step 5.2 */
-  }
-  
-  .selected {
-    --color: #5f8f7c !important;
-  }
-  
-  .selected:is(path) {
-    fill: var(--color);
-  }
-  
-  .selected:is(li) {
-    outline: 2px solid var(--color);
-    outline-offset: 2px;
-  }
-  
-  .stats {
-    font-family: sans-serif;
-    max-width: 400px;
-    margin: 1rem auto;
-    padding: 1rem;
-    background: #f9f9f9;
-    border-radius: 8px;
-  }
-  .stats dl {
-    display: grid;
-    grid-template-columns: max-content auto;
-    gap: 0.5rem 1rem;
-  }
-  .stats dt {
-    font-weight: bold;
-  }
-  .stats dd {
-    margin: 0;
-  }
-  
-  .gridlines .tick line {
-    stroke: #ccc;
-    stroke-opacity: 0.6;
-  }
-
-  /* Tooltip layout */
-.info {
+/* Formatting projects page */
+.projects {
   display: grid;
-  grid-template-columns: max-content auto;
-  gap: 0.3em 1em;
-  font-family: sans-serif;
-  font-size: 0.9em;
-  background: #fff;
-  padding: 1em;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1em;
+  align-items: end;
 }
 
-.info dt {
-  font-weight: bold;
-  opacity: 0.6;
+.projects article {
+  /* border: 1px solid #ccc;
+  padding: 1em; */
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row-gap: 1em;
+  grid-row: span 3;
+}
+
+.projects article img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 0;
+}
+
+.projects article h2 {
   margin: 0;
 }
 
-.info dd {
+.projects article p {
   margin: 0;
+  font-size: 1em;
 }
 
-/* Tooltip placement */
-.tooltip {
-  position: fixed;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  padding: 0.8em;
-  font-size: 0.9em;
-  z-index: 1000;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-.tooltip[hidden] {
-  opacity: 0;
-  visibility: hidden;
+/* Target all elements with the class 'project-year'  (Lab 5) */
+.project-year {
+  /* Add your specific styles here */
+  font-style: italic;
+  font-size: 0.9em; /* Make it slightly smaller */
+  color: #666; /* Give it a gray color */
+  text-align: left; /* Example: Align it to the right */
+  margin-top: 5px; /* Add some space above it */
+  font-family: Baskerville, serif; /* Include a generic serif fallback */
+  font-variant-numeric: oldstyle-nums;
 }
 
-
-/* Dot hover scaling */
-circle {
-  transition: 200ms;
-  transform-origin: center;
-  transform-box: fill-box;
-  @starting-style {
-  r: 0;
-}
+/* Resizing headers and fixing line evenness*/
+h1 {
+  font-size: 370%; /* Make the main heading significantly larger */
 }
 
-circle:hover {
-  transform: scale(1.5);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.1; /* Improve heading readability with tighter line spacing */
+  text-wrap: balance; /* Prevent unevenly short last lines in headings */
 }
 
+/* Styling the Resume Page */
+#personal-info {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+#personal-info h2 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+#personal-info p {
+  line-height: 1.6;
+  margin-bottom: 0.25em;
+}
+
+#personal-info a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+#personal-info a:hover {
+  text-decoration: underline;
+}
+
+#education,
+#experience,
+#projects,
+#skills {
+  margin-bottom: 2em;
+}
+
+#education h2,
+#experience h2,
+#projects h2,
+#skills h2 {
+  font-size: 1.75em;
+  margin-bottom: 0.5em;
+}
+
+#education hr,
+#experience hr,
+#projects hr,
+#skills hr {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin-bottom: 1em;
+}
+
+#education article,
+#experience article,
+#projects article,
+#skills article {
+  margin-bottom: 1.5em;
+}
+
+#education article header h3,
+#experience article header h3,
+#projects article header h3 {
+  font-size: 1.25em;
+  margin-bottom: 0.25em;
+}
+
+#education article header p,
+#experience article header p,
+#projects article header p {
+  color: #777;
+  font-style: italic;
+  margin-bottom: 0.5em;
+}
+
+#education article ul,
+#experience article ul,
+#projects article ul,
+#skills article ul {
+  list-style: disc;
+  padding-left: 1.5em;
+}
+
+#education article li,
+#experience article li,
+#projects article li,
+#skills article li {
+  line-height: 1.6;
+  margin-bottom: 0.5em;
+}
+
+#skills article ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em;
+  padding-left: 0;
+  list-style: none;
+}
+
+#skills article li {
+  background-color: #f0f0f0;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  margin-bottom: 0;
+}
+
+/* Right Align - Left Align */
+.title_year {
+  float: right;
+}
+
+/* Dates in projects section of resume */
+.tech_year {
+  color: #777;
+  font-style: italic;
+  font-size: 16px;
+  margin-bottom: 0.5em;
+  font-weight: normal; /* Set a normal font weight if paragraphs aren't bold */
+  /* Add any other paragraph-specific styles you want here, like line-height, color, etc. */
+  float: right;
+}
+
+/* Dealing with links on resume page */
+/* Link Styles for Personal Info Section with Dark Mode Support */
+#personal-info a {
+  color: var(--link-color-light); /* Default to light mode color */
+  text-decoration: none;
+}
+
+#personal-info a:hover {
+  color: var(--link-hover-color-light);
+  text-decoration: underline;
+}
+
+/* Dark mode link styles for about me header */
+@media (prefers-color-scheme: dark) {
+  #personal-info a {
+    color: var(--link-color-dark);
+  }
+
+  #personal-info a:hover {
+    color: var(--link-hover-color-dark);
+  }
+}
+
+/* Skills section readability in dark mode */
+@media (prefers-color-scheme: dark) {
+  #skills li {
+    color: #171717; /* Dark gray */
+  }
+}
+
+/* Adding some alignment modifications to my homepage */
+.homepage-section {
+  display: flex; /* Enable flexbox for layout */
+  align-items: stretch; /* Make items the same height as the tallest item */
+  gap: 5px; /* Add some space between the text and the image */
+  margin-bottom: 30px; /* Add some space below this section */
+}
+
+.homepage-text {
+  flex: 1; /* Allow the text to take up remaining space */
+  padding: 10px; /* Add some padding around the text */
+  border: 0px solid #ccc; /* Optional: Add a border for the "boxy" look */
+  border-radius: 5px; /* Optional: Add rounded corners */
+  /* background-color: #f9f9f9; */
+}
+
+.homepage-image {
+  display: flex; /* Enable flexbox on the image container */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  flex-shrink: 0;
+  width: 300px;
+  height: auto; /* Or a fixed height if you are using that */
+  padding: 0px;
+  border: 0px solid #ccc;
+  border-radius: 5px;
+  /* background-color: #fff; */
+}
+
+.homepage-image img {
+  display: block;
+  max-width: 100%; /* Ensure image doesn't exceed container width */
+  max-height: 100%; /* Ensure image doesn't exceed container height */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Scale image down to fit within the container */
+}
+
+/* modifying github stats bar */
+#profile-stats {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  /* Light mode styles (or defaults) */
+}
+
+#profile-stats h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.45em;
+  color: #333; /* Light mode text color */
+}
+
+.github-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px 20px;
+}
+
+.stat-label {
+  font-size: 1em;
+  color: #777; /* Light mode label color */
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: 1.75em;
+  color: #333; /* Light mode value color */
+}
+
+/* Dark mode styles for github bar */
+/* @media (prefers-color-scheme: dark) {
+  #profile-stats {
+    border: 1px solid #444;
+    background-color: #222;
+  }
+
+  #profile-stats h3 {
+    color: #eee;
+  }
+
+  .stat-label {
+    color: #aaa;
+  }
+
+  .stat-value {
+    color: #fff;
+  }
+} */
+
+/* dark mode stuff for home page */
+html.dark .homepage-text {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border-color: #444;
+}
+
+html.dark .homepage-image {
+  background-color: #2a2a2a;
+  border-color: #444;
+}
+
+html.dark h1,
+html.dark h3 {
+  color: #f1f1f1;
+}
+
+/* lab 5 CSS design - projects page */
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
+}
+
+/* lab 5 CSS design - legend on projects page */
+.legend {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 1em; /* Spacing between legend items */
+  border: 1px solid #ccc; /* Optional border */
+  padding: 1em; /* Spacing inside the legend */
+  margin-top: 2em; /* Spacing above the legend */
+  list-style-type: none; /* Remove bullet points */
+}
+
+.legend-item {
+  /* Class for each <li> */
+  display: flex;
+  align-items: center;
+  gap: 0.5em; /* Spacing between swatch and text */
+}
+
+.swatch {
+  width: 1em;
+  height: 1em;
+  aspect-ratio: 1 / 1; /* Ensure it's a square */
+  background-color: var(--color); /* Use the CSS variable set in D3 */
+  display: inline-block; /* Allows width and height to be set */
+  border-radius: 50%; /* Optional slight rounding */
+}
+
+/* Container style for positioning the pie chart and legend */
+.container {
+  display: flex;
+  align-items: center;
+  gap: 2em; /* Adjust the spacing between the pie chart and legend as needed */
+}
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Spacing the search bar a bit */
+.searchBar {
+  margin-bottom: 20px; /* Adjust the value as needed for spacing */
+}
+
+.projects {
+  margin-top: 20px; /* Adjust the value as needed for spacing */
+}
+
+/* style for selecting pie slices */
+.selected {
+  --color: oklch(60% 45% 0) !important;
+
+  &:is(path) {
+    fill: var(--color); /* Apply the selected color */
+  }
+}
+
+path {
+  transition: 300ms;
+  cursor: pointer; /* Indicate that the pie slices are clickable */
+}
+
+/* styling for meta stats page */
+#stats h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.45em;
+  color: #333; /* Light mode text color */
+}
+
+.summary-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  grid-template-rows: repeat(2, auto); /* 2 rows, auto height */
+  gap: 10px 20px;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* styling for the commits by day chart */
+.gridlines line {
+  stroke: #e0e0e0; /* A light gray color */
+  stroke-width: 1px; /* Or a thinner value if needed */
+  opacity: 0.7; /* Adjust the opacity to make them more subtle */
+}
+
+/* tooltip css */
 dl.info {
   display: grid;
-  grid-template-columns: max-content auto;
-  gap: 0.3em 1em;
-  font-family: sans-serif;
-  font-size: 0.9em;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 0.8em;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(4px);
-  position: fixed;
-  z-index: 1000;
-  pointer-events: none;
+  grid-template-columns: auto 1fr;
   transition-duration: 500ms;
   transition-property: opacity, visibility;
 }
@@ -348,10 +529,100 @@ dl.info[hidden]:not(:hover, :focus-within) {
   visibility: hidden;
 }
 
+dl.info dt {
+  margin: 0;
+  opacity: 0.6; /* make labels less prominent */
+}
+
+dl.info dd {
+  margin: 0; /* remove default margins */
+  margin-left: 1.5em;
+}
+
+.tooltip {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  background-color: rgba(255, 255, 255, 0.8); /* soft white */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* subtle elevation */
+  border-radius: 6px; /* rounded corners */
+  padding: 0.5em 1em; /* spacing */
+  backdrop-filter: blur(4px); /* optional frosted-glass effect */
+  pointer-events: none; /* so it doesn’t interfere with mouse events */
+  font-size: 0.9rem;
+  line-height: 1.4;
+  z-index: 1000; /* Added: Ensures the tooltip appears on top of other content */
+}
+
+/* This rule makes the tooltip invisible and not clickable when hidden.
+   It works in conjunction with the JS updateTooltipVisibility(false)
+   which will set the 'hidden' attribute on the dl element. */
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+circle {
+  transition: all 200ms, r calc(var(--r, 0) * 100ms);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* explicitly say what starting state should be */
+@starting-style {
+  circle {
+    r: 0;
+  }
+}
+
+circle:hover {
+  transform: scale(1.5);
+}
+
+@keyframes marching-ants {
+  to {
+    stroke-dashoffset: -8; /* 5 + 3 */
+  }
+}
+
+.selection {
+  fill-opacity: 0.1;
+  stroke: black;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 5 3;
+  animation: marching-ants 2s linear infinite;
+}
+
 circle.selected {
   fill: #ff6b6b;
-  stroke: black;
-  stroke-width: 1px;
+}
+
+#chart {
+  margin-top: 2rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  text-align: center;
+  max-width: max-content;
+  margin: 1.5rem 0; /* ⬅️ this centers the grid horizontally */
+}
+
+.stats dt {
+  grid-row: 1;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280; /* Tailwind's gray-500 */
+}
+
+.stats dd {
+  grid-row: 2;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
 }
 
 #files {
@@ -371,60 +642,53 @@ circle.selected {
 
 #files dd {
   grid-column: 2;
-}
-
-#files {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-
-  > div {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: subgrid;
-  }
-
-  dt {
-    grid-column: 1;
-  }
-
-  dd {
-    grid-column: 2;
-  }
+  display: flex; /* Added for unit visualization */
+  flex-wrap: wrap; /* Added for unit visualization */
+  align-items: start; /* Added for unit visualization */
+  align-content: start; /* Added for unit visualization */
+  gap: 0.15em; /* Added for unit visualization */
+  padding-top: 0.6em; /* Added for unit visualization */
+  margin-left: 0; /* Added for unit visualization */
 }
 
 .loc {
   display: flex;
   width: 0.5em;
   aspect-ratio: 1;
-  background: steelblue;
+  background: var(--color); /* Modified to use the CSS variable */
   border-radius: 50%;
 }
 
-#files dd {
-  grid-column: 2;
+#scrolly-1 {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  align-content: start;
-  gap: 0.15em;
-  padding-top: 0.6em;
-  margin-left: 0;
+  gap: 1rem;
 }
 
-#files code {
-  font-family: monospace;
+#scrolly-1 > * {
+  flex: 1;
 }
 
-#files small {
-  display: block;
-  font-size: 0.8em;
-  opacity: 0.6;
+#scatter-story {
+  position: relative;
 }
 
-.loc {
-  display: flex;
-  width: 0.5em;
-  aspect-ratio: 1;
-  background: var(--color, steelblue); /* fallback color */
-  border-radius: 50%;
+#scatter-plot {
+  position: sticky;
+  top: 0;
+  height: 50vh;
+}
+
+#scrolly-1 .step {
+  padding-bottom: 20vh; /* Adjust as needed to space out the steps */
+}
+
+#language-breakdown {
+  width: 80%; /* Or any specific pixel value like 300px */
+  max-width: 500px; /* To prevent them from getting too wide on large screens */
+  margin-left: auto; /* Centers the block element if it has a defined width */
+  margin-right: auto; /* Centers the block element if it has a defined width */
+  text-align: center; /* Centers the text content within the block */
+  margin-top: 1rem; /* Add some space below the plot, as previously suggested */
+  min-height: 100px;
 }

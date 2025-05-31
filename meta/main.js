@@ -183,7 +183,8 @@ function renderCommitInfo(data, commits) {
     const dots = svg.append('g').attr('class', 'dots');
   
     dots.selectAll('circle')
-      .data(sortedCommits)
+      dots.selectAll('circle')
+    .data(sortedCommits, d => d.id)
       .join('circle')
       .attr('cx', d => xScale(d.datetime))
       .attr('cy', d => yScale(d.hourFrac))
@@ -233,7 +234,7 @@ svg.selectAll('.dots, .overlay ~ *').raise();
 
   dots
     .selectAll('circle')
-    .data(sorted)
+    .data(sorted, d => d.id)
     .join('circle')
     .attr('cx', d => xScale(d.datetime))
     .attr('cy', d => yScale(d.hourFrac))
